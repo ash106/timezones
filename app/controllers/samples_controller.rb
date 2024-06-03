@@ -1,5 +1,6 @@
 class SamplesController < ApplicationController
   before_action :set_sample, only: %i[ show edit update destroy ]
+  around_action :set_time_zone, only: [:new, :create, :edit, :update]
 
   # GET /samples or /samples.json
   def index
@@ -66,5 +67,10 @@ class SamplesController < ApplicationController
     # Only allow a list of trusted parameters through.
     def sample_params
       params.require(:sample).permit(:name, :collection_date)
+    end
+
+    def set_time_zone
+      time_zone = "Eastern Time (US & Canada)"
+      Time.use_zone(time_zone) { yield }
     end
 end
