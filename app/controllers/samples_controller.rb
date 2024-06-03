@@ -1,6 +1,6 @@
 class SamplesController < ApplicationController
   before_action :set_sample, only: %i[ show edit update destroy ]
-  around_action :set_time_zone, only: [:new, :create, :edit, :update]
+  around_action :set_time_zone, only: [:new, :create, :edit, :update, :show]
 
   # GET /samples or /samples.json
   def index
